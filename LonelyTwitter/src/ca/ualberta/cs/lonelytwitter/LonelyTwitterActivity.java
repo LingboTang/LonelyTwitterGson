@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.lonelytwitter.data.FileDataManager;
+import ca.ualberta.cs.lonelytwitter.data.GsonFileDataManager;
 import ca.ualberta.cs.lonelytwitter.data.IDataManager;
 
 public class LonelyTwitterActivity extends Activity {
@@ -23,6 +25,8 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweets;
 
 	private ArrayAdapter<Tweet> tweetsViewAdapter;
+	
+	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -31,7 +35,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		setContentView(R.layout.main);
 
-		dataManager = new FileDataManager(this);
+		dataManager = new GsonFileDataManager(this);
 
 		bodyText = (EditText) findViewById(R.id.body);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
@@ -66,5 +70,11 @@ public class LonelyTwitterActivity extends Activity {
 		tweetsViewAdapter.notifyDataSetChanged();
 		dataManager.saveTweets(tweets);
 	}
+	
+	public void Summary(View v) {
+		Intent intent = new Intent(this,SummaryActivity.class);
+		startActivity(intent);
+	}
+	
 
 }
